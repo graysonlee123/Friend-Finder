@@ -34,6 +34,8 @@ function compare(userData) {
             // Reset difference total each iteration
             let differenceTotal = 0;
 
+            console.log(`${potentialPick.name} compare to ${userData.name}`)
+
             // Cycle through the scores of the current data piece, and calculate the difference
             potentialPick.scores.forEach( (score, i) => {
                 differenceTotal += Math.abs(score - userData.scores[i]);
@@ -42,14 +44,34 @@ function compare(userData) {
             if (differenceTotal < lowestDifference && potentialPick.name != userData.name) {
                 lowestDifference = differenceTotal;
                 chosenFriend = potentialPick;
-            }
+            };
         });
         console.log(chosenFriend.name);
-        modal(chosenFriend);
+        displayResults(chosenFriend, lowestDifference);
     });
 };
 
-function modal(match) {
-    console.log(`From modal:`);
-    console.log(match);
+function displayResults(chosenFriend, matchScore) {
+
+    matchScore = 100 - matchScore;
+
+    const page = $("#survey-body");
+
+    const resutlsOverlay = $(`<div id="results-overlay">`);
+
+    const resultsContainer = $(`<div id="results-container" class="gradient-bg">
+        <div>
+            <h1 class="results-h1">it's a match!</h1>
+            <p class="results-p">You were matched with:</p>
+        </div>
+        <div id="results-display">
+            <h1>${chosenFriend.name}</h1>
+            <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img">
+            <p class="results-p">Your match score is ${matchScore} points!</p>
+            <a href="/"><button id="home-results-button" class="button">Home</button></a>
+        </div>
+    </div>`);
+    resutlsOverlay.append(resultsContainer);
+
+    page.append(resutlsOverlay);
 }
