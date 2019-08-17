@@ -5,103 +5,103 @@ const info = [
 
 const questions = [
     {
-        number: 1,
-        question: "Question 1 lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "You enjoy vibrant social events with lots of people.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c",
-            "Answer d"
+            "Very much so",
+            "Most of the time",
+            "Neutral",
+            "Not often",
+            "Not at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "You often think about what you should have said in a conversation long after it has taken place.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very often",
+            "Sometimes",
+            "Neutral",
+            "Not so much",
+            "Never"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "People can rarely upset you.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "It would be a challenge for you to spend the whole weekend all by yourself without feeling bored.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very much so",
+            "Yes",
+            "Neutral",
+            "No",
+            "Not at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "You are more of a detail-oriented than a big picture person.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "When looking for a movie to watch, you can spend ages browsing the catalog.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "When you sleep, your dreams tend to be bizarre and fantastical.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very much so",
+            "Sometimes",
+            "Neutral",
+            "Not too often",
+            "Not at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "You tend to focus on present realities rather than future possibilities.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "When starting to work on a project, you prefer to make as many decisions upfront as possible.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     },
     {
-        number: 2,
-        question: "twenty lorem ipsum dolar lorem ipsum dolar sali?",
+        question: "After a long and exhausting week, a fun party is just what you need.",
         choices: [
-            "Answer A",
-            "Answer b",
-            "Answer c d",
-            "Answer d"
+            "Very true",
+            "True",
+            "Neutral",
+            "Not true",
+            "Not true at all"
         ]
     }
 ]
@@ -116,11 +116,15 @@ function generateQuestions () {
         label.append($(`<h2>Question ${i + 1}</h2>`), $(`<p>${item.question}</p>`));
 
         const selections = $(`<select name="question-${i}" id="question-${i}" class="dropdown">`);
-        selections.append($(`<option value="" disabled selected hidden>Select an Option</option>`));
+        // selections.append($(`<option value="" disabled selected hidden>Select an Option</option>`));
 
         // Loop through each answer and create a dropdown item for it
         item.choices.forEach( (item, i) => {
-            selections.append($(`<option value="${i}">${item}</option>`));
+            if (item === "Neutral") {
+                selections.append($(`<option value="${i}" selected>${item}</option>`));
+            } else {
+                selections.append($(`<option value="${i}">${item}</option>`));
+            }
         });
 
         questionContainer.append(label);

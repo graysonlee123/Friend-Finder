@@ -19,5 +19,7 @@ function calculateMatch() {
         scores: scores
     }
 
+    // Compare method here
+
     $.post("api/friends", userAnswers);
 }
