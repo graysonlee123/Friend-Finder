@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +8,32 @@
     <title>Getting Started</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,900&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="master.css">
 </head>
+
 <body id="survey-body">
     <div id="survey-div" class="gradient-bg">
         <h1>Survey Time</h1>
         <form action="">
-            <div class="text-input-box survey-row">
-                <label for="name-input" class="label required-field"><h2>Name</h2></label>
-                <input type="text" id="name-input" class="text-input">
-            </div>
-            <div class="text-input-box survey-row">
-                <label for="photo-url-input" class="label required-field"><h2>Link to Photo</h2></label>
-                <input type="text" id="photo-url-input" class="text-input">
+            <div id="info-container">
+                <!-- <div class="text-input-box survey-row">
+                    <label for="name-input" class="label required-field">
+                        <h2>Name</h2>
+                    </label>
+                    <input type="text" id="name-input" class="text-input">
+                </div>
+                <div class="text-input-box survey-row">
+                    <label for="photo-url-input" class="label required-field">
+                        <h2>Link to Photo</h2>
+                    </label>
+                    <input type="text" id="photo-url-input" class="text-input">
+                </div> -->
             </div>
             <hr class="main-hr">
             <div id="questions-container">
-
-            </div>
-            <!-- <div class="question-box survey-row">
+                <!-- <div class="question-box survey-row">
                 <label for="question-1" class="label">
                     <h2>Question 1</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, porro?</p>
@@ -40,8 +46,12 @@
                     <option value="d">Test 4</option>
                 </select>
             </div> -->
-            
+            </div>
         </form>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/app/public/generateSurvey.js"></script>
 </body>
+
 </html>

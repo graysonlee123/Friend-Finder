@@ -7,5 +7,9 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../public/home.htm
 
 app.get("/survey", (req, res) => res.sendFile(path.join(__dirname, "../public/survey.html")));
 
+//Below should be removed after public folder decides to start working
+
 app.get("/master.css", (req, res) => res.sendFile(path.join(__dirname, "../public/master.css")));
 app.get("/reset.css", (req, res) => res.sendFile(path.join(__dirname, "../public/reset.css")));
+
+app.get("/app/public/generateSurvey.js", (req, res) => res.sendFile(path.join(__dirname, "../public/generateSurvey.js")));
