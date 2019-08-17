@@ -1,6 +1,6 @@
 const info = [
-    {label: "Name", for: "name-input", id: "name-input"},
-    {label: "Link to Photo", for: "photo-url-input", id: "photo-url-input"},
+    {label: "Name", for: "name-input", id: "name-input", placeholder: "Johnny Appleseed"},
+    {label: "Link to Photo", for: "photo-url-input", id: "photo-url-input", placeholder: "http://myawesomeimage.com/image"},
 ];
 
 const questions = [
@@ -106,6 +106,22 @@ const questions = [
     }
 ]
 
+function generateInfo () {
+    const container = $("#info-container");
+
+    info.forEach( (item, i) => {
+        const infoContainer = $(`<div class="text-input-box survey-row">`);
+
+        const label = $(`<label for="${item.for}" class="label required-field">`);
+        label.append($(`<h2 id="required-${item.id}">${item.label}</h2>`));
+        
+        const input = $(`<input type="text" id="${item.id}" class="text-input" placeholder="${item.placeholder}">`);
+
+        infoContainer.append(label, input);
+        container.append(infoContainer);
+    });
+};
+
 function generateQuestions () {
     const container = $("#questions-container");
 
@@ -132,23 +148,7 @@ function generateQuestions () {
 
         container.append(questionContainer);
     });
-}
-
-function generateInfo () {
-    const container = $("#info-container");
-
-    info.forEach( (item, i) => {
-        const infoContainer = $(`<div class="text-input-box survey-row">`);
-
-        const label = $(`<label for="${item.for}" class="label required-field">`);
-        label.append($(`<h2>${item.label}</h2>`));
-        
-        const input = $(`<input type="text" id="${item.id}" class="text-input">`);
-
-        infoContainer.append(label, input);
-        container.append(infoContainer);
-    });
-}
+};
 
 generateInfo();
 generateQuestions();

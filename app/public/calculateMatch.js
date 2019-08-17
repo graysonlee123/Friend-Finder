@@ -1,6 +1,27 @@
 $("#submit-button").on("click", function (e) {
     e.preventDefault();
-    calculateMatch();
+
+    const name = $("#required-name-input");
+    const photo = $("#required-photo-url-input")
+    
+    if ( !$("#name-input").val() || !$("#photo-url-input").val() ) {
+        
+        // Scroll back to top
+        $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
+        
+        // Add red class
+        if ( !$("#name-input").val() && !$("#photo-url-input").val() ) {
+            name.addClass("red");
+            photo.addClass("red");
+        } else if ( !$("#name-input").val() ) {
+            name.addClass("red");
+        } else if ( !$("#photo-url-input").val() ) {
+            photo.addClass("red");
+        }
+        
+    } else {
+        calculateMatch();
+    }
 });
 
 function calculateMatch() {
@@ -53,6 +74,8 @@ function compare(userData) {
 
 function displayResults(chosenFriend, matchScore) {
 
+    $(".nav-button").addClass("inverse");
+
     matchScore = 100 - matchScore;
 
     const page = $("#survey-body");
@@ -66,7 +89,7 @@ function displayResults(chosenFriend, matchScore) {
         </div>
         <div id="results-display">
             <h1>${chosenFriend.name}</h1>
-            <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img">
+            <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img" onerror="this.onerror=null;this.src='http://via.placeholder.com/200'">
             <p class="results-p">Your match score is ${matchScore} points!</p>
             <a href="/"><button id="home-results-button" class="button">Home</button></a>
         </div>

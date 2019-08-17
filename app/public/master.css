@@ -37,6 +37,17 @@ body {
     color: rgba(161, 107, 255, 0.9);
 }
 
+.inverse i {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 18px;
+    margin-bottom: 12px;
+    transition: color 200ms ease-in-out;
+}
+
+.inverse:hover i {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 /* Main styling */
 
 .gradient-bg {
@@ -122,6 +133,10 @@ p {
     display: block;
 }
 
+.red::after {
+    color: rgb(207, 41, 44) !important;
+}
+
 .required-field h2::after {
     content: "Required";
     font-size: 12px;
@@ -170,7 +185,7 @@ p {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.8);
     z-index: 5;
 
     display: flex;
