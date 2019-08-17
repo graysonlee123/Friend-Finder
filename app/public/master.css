@@ -5,9 +5,7 @@
 
 body {
     background-color: rgb(245, 245, 245);
-}
-
-#home-body {
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,19 +15,23 @@ body {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+/* Main styling */
+
+.gradient-bg {
+    background-image: linear-gradient(-45deg, #FF7070, #a16bff);
+    padding: 30px;
+}
+
 #home-div {
     width: 672px;
     height: auto;
 
-    padding: 30px;
-
     border-radius: 6px;
-    background-image: linear-gradient(-45deg, #FF7070, #a16bff);
-
-    box-shadow: 15px 15px 25px rgba(161, 107, 255, 0.30)
+    
+    box-shadow: 15px 15px 25px rgba(161, 107, 255, 0.30);
 }
 
-#home-h1 {
+h1 {
     font-size: 62px;
     font-weight: 900;
     text-transform: uppercase;
@@ -37,10 +39,16 @@ body {
     margin-bottom: 32px;
 }
 
-#home-p {
+h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+p {
     font-size: 14px;
-    
-    margin-bottom: 32px;
+    font-weight: 400;
+    margin-bottom: 12px;
 }
 
 #home-button {
@@ -64,5 +72,67 @@ body {
 }
 
 #home-button:focus {
+    outline: none;
+}
+
+/* Survey */
+
+#survey-body {
+    height: auto;
+}
+
+#survey-div {
+    width: 672px;
+    height: auto;
+
+    box-shadow: 15px 0 25px rgba(161, 107, 255, 0.30);
+}
+
+.survey-row {
+    margin-bottom: 24px;
+}
+
+.text-input-box {
+    display: block;
+}
+
+.label {
+    display: block;
+}
+
+.required-field h2::after {
+    content: "Required";
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-left: 10px;
+}
+
+.text-input {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    color: rgba(0,0,0,0.5);
+}
+
+.main-hr {
+    margin: 32px 0;
+}
+
+.dropdown {
+    display: block;
+    width: 160px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    color: rgba(0,0,0,0.5);
+}
+
+.dropdown option {
+    color: rgba(0,0,0,0.75);
+}
+
+.dropdown:focus {
     outline: none;
 }
