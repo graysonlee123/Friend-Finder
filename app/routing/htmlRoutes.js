@@ -13,3 +13,4 @@ app.get("/master.css", (req, res) => res.sendFile(path.join(__dirname, "../publi
 app.get("/reset.css", (req, res) => res.sendFile(path.join(__dirname, "../public/reset.css")));
 
 app.get("/app/public/generateSurvey.js", (req, res) => res.sendFile(path.join(__dirname, "../public/generateSurvey.js")));
+app.get("/app/public/calculateMatch.js", (req, res) => res.sendFile(path.join(__dirname, "../public/calculateMatch.js")));

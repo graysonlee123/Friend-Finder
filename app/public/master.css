@@ -88,7 +88,7 @@ p {
     box-shadow: 6px 6px 6px rgba(0,0,0,0.16)
 }
 
-#home-button:focus {
+#home-button:focus, #submit-button:focus {
     outline: none;
 }
 
