@@ -15,6 +15,23 @@ body {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+/* Home btn */
+
+#home-html-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+#home-html-button i {
+    color: rgba(161, 107, 255, 0.25);
+    font-size: 18px;
+}
+
+#home-html-button:hover i {
+    color: rgba(161, 107, 255, 0.9);
+}
+
 /* Main styling */
 
 .gradient-bg {
@@ -51,10 +68,10 @@ p {
     margin-bottom: 12px;
 }
 
-#home-button {
+#home-button, #submit-button {
     padding: 16px 32px;
     min-width: 200px;
-    margin: auto;
+    margin: 12px auto;
     display: block;
 
     border-radius: 32px;
@@ -118,6 +135,8 @@ p {
 
 .main-hr {
     margin: 32px 0;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5)
 }
 
 .dropdown {
