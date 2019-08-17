@@ -1,3 +1,8 @@
+const info = [
+    {label: "Name", for: "name-input", id: "name-input"},
+    {label: "Link to Photo", for: "photo-url-input", id: "photo-url-input"},
+];
+
 const questions = [
     {
         number: 1,
@@ -45,4 +50,21 @@ function generateQuestions () {
     });
 }
 
+function generateInfo () {
+    const container = $("#info-container");
+
+    info.forEach( (item, i) => {
+        const infoContainer = $(`<div class="text-input-box survey-row">`);
+
+        const label = $(`<label for="${item.for}" class="label required-field">`);
+        label.append($(`<h2>${item.label}</h2>`));
+        
+        const input = $(`<input type="text" id="${item.id}" class="text-input">`);
+
+        infoContainer.append(label, input);
+        container.append(infoContainer);
+    });
+}
+
+generateInfo();
 generateQuestions();
