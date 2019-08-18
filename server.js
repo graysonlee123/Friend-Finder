@@ -1,19 +1,18 @@
-// Requirements
 const express = require("express");
 const app = express();
 
-const PORT = 8080;
-
 const path = require("path");
 
-const htmlRoutes = require("./app/routing/htmlRoutes.js");
-const apiRoutes = require("./app/routing/apiRoutes.js");
+const PORT = process.env.PORT || 8080;
 
-// Server logic
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(htmlRoutes);
-app.use(apiRoutes);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
-app.use( "/html", express.static ( path.join( __dirname, "/app/public") ) );
+app.use(express.static('app/public'))
 
-app.listen( PORT, () => console.log("Listening on port " + PORT) );
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT);
+})

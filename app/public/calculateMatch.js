@@ -9,7 +9,7 @@ $("#submit-button").on("click", function (e) {
         // Scroll back to top
         $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
         
-        // Add red class
+        // Add red class to require text
         if ( !$("#name-input").val() && !$("#photo-url-input").val() ) {
             name.addClass("red");
             photo.addClass("red");
