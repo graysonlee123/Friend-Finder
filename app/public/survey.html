@@ -36,62 +36,80 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="generateSurvey.js"></script>
     <script src="calculateMatch.js"></script>
-
-    <!-- Runs the logic for checking the form for valid data and pushes the user's valid data to the API to calculate
-    match -->
     <script>
+        const nameInputContainer = $("#required-name-input");
+        const photoInputContainer = $("#required-photo-url-input");
+
+        let nameValue = null;
+        let photoValue = null;
+
+        function buildUserObj() { 
+
+            const scores = [];
+            $(".dropdown").each(function (index) {
+                const value = $(this).val();
+                scores.push($(this).val() || 0);
+            });
+
+            const userAnswers = {
+                name: nameValue,
+                photo: photoValue,
+                scores: scores
+            };
+
+            return userAnswers;
+        }
+
+        function highlightNameField() {
+            console.log("Highlighting name field...");
+            nameInputContainer.addClass("red");
+            scroll();
+        }
+
+        function highlightPhotoField() {
+            console.log("Highlighting photo field...");
+            photoInputContainer.addClass("red");
+            scroll();
+        }
+
+        function refreshFieldHighlights() {
+            nameInputContainer.removeClass("red");
+            photoInputContainer.removeClass("red");
+        }
+
+        function scroll() {
+            // Scroll back to top
+            $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
+        };
+
+        function checkInputs() {
+            nameValue = $("#name-input").val();
+            photoValue = $("#photo-url-input").val();
+
+            if (!nameValue && !photoValue) {
+                highlightNameField();
+                highlightPhotoField();
+                return false;
+            } else if (!nameValue) {
+                highlightNameField();
+                return false;
+            } else if (!photoValue) {
+                highlightPhotoField();
+                return false;
+            }
+            return true;
+        }
+
         $("#submit-button").on("click", function (e) {
             e.preventDefault();
 
-            const name = $("#required-name-input");
-            const photo = $("#required-photo-url-input")
+            refreshFieldHighlights();
 
-            $.get($("#photo-url-input").val())
-                .done(function () {
-                    console.log("Valid image.");
-
-                    // Run rest of code
-
-                    if (!$("#name-input").val() || !$("#photo-url-input").val()) {
-
-                        // Scroll back to top
-                        $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-
-                        // Add red class to require text
-                        if (!$("#name-input").val() && !$("#photo-url-input").val()) {
-                            name.addClass("red");
-                            photo.addClass("red");
-                        } else if (!$("#name-input").val()) {
-                            name.addClass("red");
-                        } else if (!$("#photo-url-input").val()) {
-                            photo.addClass("red");
-                        }
-
-                    } else {
-                        const nameInput = $("#name-input").val();
-                        const photoInput = $("#photo-url-input").val();
-
-                        const scores = [];
-                        $(".dropdown").each(function (index) {
-                            const value = $(this).val();
-                            scores.push($(this).val() || 0);
-                        });
-
-                        const userAnswers = {
-                            name: nameInput,
-                            photo: photoInput,
-                            scores: scores
-                        }
-
-                        calculateMatch(userAnswers);
-                    };
-
-                }).fail(function () {
-                    console.log("Not a valid image!");
-                    $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-                    photo.addClass("red");
-                    photo.attr("data-content", "Image Link Invalid");
-                });
+            if (checkInputs()) {
+                console.log("All values valid.")
+                const userAnswers = buildUserObj();
+                calculateMatch(userAnswers);
+            }
         });
     </script>
 </body>

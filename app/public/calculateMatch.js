@@ -1,5 +1,6 @@
 function calculateMatch(userAnswers) {
     // Compare method here
+    console.log(userAnswers);
     compare(userAnswers);
     // And post the user's data to the friends api page
     $.post("api/friends", userAnswers);
@@ -13,6 +14,8 @@ function compare(userData) {
         data.forEach((potentialPick) => {
             // Reset difference total each iteration
             let differenceTotal = 0;
+
+            console.log(potentialPick)
 
             // Cycle through the scores of the current data piece, and calculate the difference
             potentialPick.scores.forEach((score, i) => {
@@ -42,8 +45,8 @@ function displayResults(chosenFriend, matchScore) {
 
     const resultsContainer = $(`<div id="results-container" class="gradient-bg">
         <div>
-            <h1 class="results-h1">it's a match!</h1>
-            <p class="results-p">You were matched with:</p>
+            <h1 class="results-h1">found a friend!</h1>
+            <p class="results-p">You would be good friends with:</p>
         </div>
         <div id="results-display">
             <h1>${chosenFriend.name}</h1>
