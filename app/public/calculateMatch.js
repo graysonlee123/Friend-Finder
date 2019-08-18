@@ -50,7 +50,9 @@ function displayResults(chosenFriend, matchScore) {
         </div>
         <div id="results-display">
             <h1>${chosenFriend.name}</h1>
-            <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img" onerror="this.onerror=null;this.src='http://via.placeholder.com/200'">
+            <div class="dispaly-img-container">
+                <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img" onerror="this.onerror=null;this.src='http://via.placeholder.com/200'">
+            </div>
             <p class="results-p">Your match score is ${matchScore} points!</p>
             <a href="/"><button id="home-results-button" class="button">Home</button></a>
         </div>
