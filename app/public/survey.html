@@ -16,21 +16,6 @@
 </head>
 
 <body id="survey-body">
-<!-- <div id="results-overlay">
-        <div id="results-container" class="gradient-bg">
-            <div>
-                <h1 class="results-h1">It's a Match!</h1>
-                <p class="results-p">You were matched with:</p>
-            </div>
-            <div id="results-display">
-                <h1>Gary</h1>
-                <img src="http://via.placeholder.com/200" alt="Gary" class="results-img">
-                <p class="results-p">Your match score is 14 points!</p>
-                <a href="/"><button id="home-results-button" class="button">Home</button></a>
-            </div>
-        </div>
-    </div> -->
-
     <div id="nav-container">
         <a href="/" class="nav-button"><i class="fas fa-home"></i></a>
         <a href="/api/friends" class="nav-button"><i class="fas fa-list"></i></i></a>
@@ -51,6 +36,64 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="generateSurvey.js"></script>
     <script src="calculateMatch.js"></script>
+
+    // Runs the logic for checking the form for valid data and pushes the user's valid data to the API to calculate
+    match
+    <script>
+        $("#submit-button").on("click", function (e) {
+            e.preventDefault();
+
+            const name = $("#required-name-input");
+            const photo = $("#required-photo-url-input")
+
+            $.get($("#photo-url-input").val())
+                .done(function () {
+                    console.log("Valid image.");
+
+                    // Run rest of code
+
+                    if (!$("#name-input").val() || !$("#photo-url-input").val()) {
+
+                        // Scroll back to top
+                        $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
+
+                        // Add red class to require text
+                        if (!$("#name-input").val() && !$("#photo-url-input").val()) {
+                            name.addClass("red");
+                            photo.addClass("red");
+                        } else if (!$("#name-input").val()) {
+                            name.addClass("red");
+                        } else if (!$("#photo-url-input").val()) {
+                            photo.addClass("red");
+                        }
+
+                    } else {
+                        const nameInput = $("#name-input").val();
+                        const photoInput = $("#photo-url-input").val();
+
+                        const scores = [];
+                        $(".dropdown").each(function (index) {
+                            const value = $(this).val();
+                            scores.push($(this).val() || 0);
+                        });
+
+                        const userAnswers = {
+                            name: nameInput,
+                            photo: photoInput,
+                            scores: scores
+                        }
+
+                        calculateMatch(userAnswers);
+                    };
+
+                }).fail(function () {
+                    console.log("Not a valid image!");
+                    $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
+                    photo.addClass("red");
+                    photo.attr("data-content", "Image Link Invalid");
+                });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,73 +1,31 @@
-$("#submit-button").on("click", function (e) {
-    e.preventDefault();
-
-    const name = $("#required-name-input");
-    const photo = $("#required-photo-url-input")
-    
-    if ( !$("#name-input").val() || !$("#photo-url-input").val() ) {
-        
-        // Scroll back to top
-        $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-        
-        // Add red class to require text
-        if ( !$("#name-input").val() && !$("#photo-url-input").val() ) {
-            name.addClass("red");
-            photo.addClass("red");
-        } else if ( !$("#name-input").val() ) {
-            name.addClass("red");
-        } else if ( !$("#photo-url-input").val() ) {
-            photo.addClass("red");
-        }
-        
-    } else {
-        calculateMatch();
-    }
-});
-
-function calculateMatch() {
-    const name = $("#name-input").val();
-    const photo = $("#photo-url-input").val();
-    
-    const scores = [];
-    $(".dropdown").each( function (index) {
-        const value = $(this).val();
-        scores.push($(this).val() || 0);
-    });
-
-    const userAnswers = {
-        name: name,
-        photo: photo,
-        scores: scores
-    }
-
+function calculateMatch(userAnswers) {
     // Compare method here
     compare(userAnswers);
-
+    // And post the user's data to the friends api page
     $.post("api/friends", userAnswers);
 };
 
 function compare(userData) {
-    $.get("/api/friends", function(data) {
-        let lowestDifference = 100000;
+    $.get("/api/friends", function (data) {
+        let lowestDifference = 100;
         let chosenFriend = null;
         // Cycle through each object received in the data array
-        data.forEach( (potentialPick, i) => {
+        data.forEach((potentialPick) => {
             // Reset difference total each iteration
             let differenceTotal = 0;
 
-            console.log(`${potentialPick.name} compare to ${userData.name}`)
-
             // Cycle through the scores of the current data piece, and calculate the difference
-            potentialPick.scores.forEach( (score, i) => {
+            potentialPick.scores.forEach((score, i) => {
                 differenceTotal += Math.abs(score - userData.scores[i]);
             });
 
+            // If the difference is a new record and they aren't the same name...
             if (differenceTotal < lowestDifference && potentialPick.name != userData.name) {
+                // Set the new record and record the potential match
                 lowestDifference = differenceTotal;
                 chosenFriend = potentialPick;
             };
         });
-        console.log(chosenFriend.name);
         displayResults(chosenFriend, lowestDifference);
     });
 };

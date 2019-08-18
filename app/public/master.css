@@ -138,7 +138,7 @@ p {
 }
 
 .required-field h2::after {
-    content: "Required";
+    content: attr(data-content);
     font-size: 12px;
     font-weight: 400;
     color: rgba(255,255,255,0.5);

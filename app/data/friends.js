@@ -1,7 +1,7 @@
 const friends = module.exports = [
     {
         "name": "Ahmed",
-        "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        "photo": "https://avatars0.githubusercontent.com/u/40544548?s=88&v=4",
         "scores": [
             "4",
             "1",
@@ -17,7 +17,7 @@ const friends = module.exports = [
     },
     {
         "name": "Gary",
-        "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        "photo": "https://avatars0.githubusercontent.com/u/40544548?s=88&v=4",
         "scores": [
             "2",
             "3",

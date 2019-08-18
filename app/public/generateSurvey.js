@@ -113,7 +113,7 @@ function generateInfo () {
         const infoContainer = $(`<div class="text-input-box survey-row">`);
 
         const label = $(`<label for="${item.for}" class="label required-field">`);
-        label.append($(`<h2 id="required-${item.id}">${item.label}</h2>`));
+        label.append($(`<h2 data-content="Required" id="required-${item.id}">${item.label}</h2>`));
         
         const input = $(`<input type="text" id="${item.id}" class="text-input" placeholder="${item.placeholder}">`);
 
