@@ -59,6 +59,9 @@ body {
     width: 672px;
     height: auto;
 
+    display: flex;
+    flex-flow: column nowrap;
+
     border-radius: 6px;
     
     box-shadow: 15px 15px 25px rgba(161, 107, 255, 0.30);
@@ -91,9 +94,9 @@ p {
 
 .button {
     padding: 16px 32px;
-    min-width: 200px;
     margin: 12px auto;
-    display: block;
+    display: inline;
+    align-self: center;
 
     border-radius: 32px;
     border: none;
@@ -103,13 +106,26 @@ p {
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
 
     cursor: pointer;
 
-    box-shadow: 6px 6px 6px rgba(0,0,0,0.16)
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.16);
+
+    transition-property: color, background-color;
+    transition: 250ms ease-in-out;
+
+    position: relative;
 }
 
-#home-button:focus, #submit-button:focus {
+.button:hover {
+    background-color: #703872;
+    color: white;
+    text-decoration: none;
+}
+
+.button:focus {
     outline: none;
 }
 
@@ -124,6 +140,11 @@ p {
     height: auto;
 
     box-shadow: 15px 0 25px rgba(161, 107, 255, 0.30);
+}
+
+.survey-form-container {
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .survey-row {
@@ -160,7 +181,7 @@ p {
 }
 
 .main-hr {
-    margin: 32px 0;
+    margin: 0 0 32px 0;
     border: none;
     border-bottom: 1px solid rgba(255,255,255,0.5)
 }
@@ -211,6 +232,9 @@ p {
 
 #results-display {
     text-align: center;
+
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .results-h1 {
@@ -226,9 +250,9 @@ p {
 .dispaly-img-container {
     width: 60%;
     height: 320px;
-    margin: 20px auto;
+    margin: 6px auto 20px;
 }
 
 .results-p {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }

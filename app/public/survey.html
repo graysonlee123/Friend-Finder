@@ -24,7 +24,7 @@
 
     <div id="survey-div" class="gradient-bg">
         <h1>Survey Time</h1>
-        <form action="">
+        <form action="" class="survey-form-container">
             <div id="info-container"></div>
             <hr class="main-hr">
             <div id="questions-container"></div>
@@ -107,8 +107,7 @@
 
             if (checkInputs()) {
                 console.log("All values valid.")
-                const userAnswers = buildUserObj();
-                calculateMatch(userAnswers);
+                calculateMatch(buildUserObj());
             }
         });
     </script>

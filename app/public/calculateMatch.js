@@ -49,12 +49,12 @@ function displayResults(chosenFriend, matchScore) {
             <p class="results-p">You would be good friends with:</p>
         </div>
         <div id="results-display">
-            <h1>${chosenFriend.name}</h1>
+            <h1 class="results-h1">${chosenFriend.name}</h1>
             <div class="dispaly-img-container">
                 <img src="${chosenFriend.photo}" alt="${chosenFriend.name}" class="results-img" onerror="this.onerror=null;this.src='http://via.placeholder.com/200'">
             </div>
-            <p class="results-p">Your match score is ${matchScore} points!</p>
-            <a href="/"><button id="home-results-button" class="button">Home</button></a>
+            <p>Your match score is ${matchScore} points!</p>
+            <a href="/" class="button">Home</a>
         </div>
     </div>`);
     resutlsOverlay.append(resultsContainer);
