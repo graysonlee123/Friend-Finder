@@ -115,10 +115,10 @@ function generateInfo () {
         const label = $(`<label for="${item.for}" class="label required-field">`);
         label.append($(`<h2 data-content="Required" id="required-${item.id}">${item.label}</h2>`));
         
-        const input = $(`<input type="text" id="${item.id}" class="text-input" placeholder="${item.placeholder}">`);
-        if (item.id === "photo-url-input") {
-            input.attr("onfocusout", "checkImage()");
-        }
+        const input = $(`<input type="text" id="${item.id}" class="text-input" placeholder="${item.placeholder}" onfocusout="checkInput('${item.for}')">`);
+        // if (item.id === "photo-url-input") {
+        //     input.attr("onfocusout", "checkInput()");
+        // }
 
         infoContainer.append(label, input);
         container.append(infoContainer);
