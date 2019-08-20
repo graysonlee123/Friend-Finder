@@ -44,6 +44,7 @@
         let photoValue = null;
 
         let validImage = false;
+        let validName = false;
 
         function buildUserObj() {
 
@@ -62,48 +63,86 @@
             return userAnswers;
         }
 
-        function checkImage(timeout) {
-            const url = $("#photo-url-input").val();
-            timeout = timeout || 5000;
-            var timedOut = false, timer;
-            var img = new Image();
-            img.onerror = img.onabort = function () {
-                if (!timedOut) {
-                    clearTimeout(timer);
-                    console.log("Error with image url!");
+        function checkInput(id) {
+
+            refreshFieldHighlights();
+
+            if (id === "name-input") {
+                checkName();
+            } else if (id === "photo-url-input") {
+                checkPhoto();
+            } else {
+                console.log("ERROR - NO ID DETECTED FOR CHECK INPUT")
+            }
+
+            function checkPhoto(timeout) {
+                const url = $("#photo-url-input").val();
+                timeout = timeout || 5000;
+                var timedOut = false, timer;
+                var img = new Image();
+                img.onerror = img.onabort = function () {
+                    if (!timedOut) {
+                        clearTimeout(timer);
+                        console.log("Error with image url!");
+                        highlightPhotoField("Invalid Image URL!");
+                        validImage = false;
+                    }
+                };
+                img.onload = function () {
+                    if (!timedOut) {
+                        clearTimeout(timer);
+                        console.log("Image load successful.");
+                        validImage = true;
+                    }
+                };
+                img.src = url;
+                timer = setTimeout(function () {
+                    timedOut = true;
+                    console.log("Image load timed out, leaving as false...");
+                    highlightPhotoField("Invalid Image URL!");
                     validImage = false;
-                }
+                }, timeout);
             };
-            img.onload = function () {
-                if (!timedOut) {
-                    clearTimeout(timer);
-                    console.log("Image load successful.");
-                    validImage = true;
-                }
+
+            function checkName() {
+                const nameInput = $("#name-input").val();
+                $.get("/api/friends", function (data) {
+                    let valid = true;
+                    data.forEach((item, i) => {
+                        let name = item.name;
+                        if (name === nameInput) {
+                            console.log("Name INVALID")
+                            valid = false;
+                            highlightNameField("Name already taken!");
+                        };
+                    });
+                    validName = valid;
+                });
             };
-            img.src = url;
-            timer = setTimeout(function () {
-                timedOut = true;
-                console.log("Image load timed out, leaving as false...");
-                validImage = false;
-            }, timeout);
+
         }
 
-        function highlightNameField() {
+        function highlightNameField(dataMsg) {
             console.log("Highlighting name field...");
+            dataMsg = dataMsg || "Required";
             nameInputContainer.addClass("red");
+            nameInputContainer.attr("data-content", dataMsg || "Required");
+            scroll();
         }
 
-        function highlightPhotoField() {
+        function highlightPhotoField(dataMsg) {
             console.log("Highlighting error photo field...");
+            dataMsg = dataMsg || "Required";
             photoInputContainer.addClass("red");
-            photoInputContainer.attr("data-content", "Invalid Image URL");
+            photoInputContainer.attr("data-content", dataMsg);
+            scroll();
         }
 
         function refreshFieldHighlights() {
             nameInputContainer.removeClass("red");
             photoInputContainer.removeClass("red");
             photoInputContainer.attr("data-content", "Required");
+            nameInputContainer.attr("data-content", "Required");
         }
 
         function scroll() {
@@ -115,18 +154,15 @@
             nameValue = $("#name-input").val();
             photoValue = $("#photo-url-input").val();
 
-            if (!nameValue && !photoValue) {
-                highlightNameField();
-                highlightPhotoField();
-                return false;
-            } else if (!nameValue) {
-                highlightNameField();
-                return false;
-            } else if (!photoValue) {
-                highlightPhotoField();
+            if (!nameValue) highlightNameField();
+
+            if (!photoValue) highlightPhotoField();
+
+            if (photoValue && nameValue) {
+                return true;
+            } else {
                 return false;
             }
-            return true;
         }
 
         $("#submit-button").on("click", function (e) {
@@ -134,16 +170,27 @@
 
             refreshFieldHighlights();
 
-
-            if (checkInputs() && validImage) {
-                console.log("All values valid.")
-                calculateMatch(buildUserObj());
-            } else if (!validImage) {
-                highlightPhotoField();
-                scroll();
-            } else {
-                scroll();
-            }
+            if (checkInputs()) {
+                if (!validImage) {
+                    highlightPhotoField("Invalid Image URL!");
+                    return;
+                } else if (!validName) {
+                    highlightNameField("Invalid Image URL!");
+                    return;
+                } else {
+                    console.log("All values valid.");
+                    calculateMatch(buildUserObj());
+                }
+            };
+            // if (checkInputs() && validImage) {
+            //     console.log("All values valid.")
+            //     calculateMatch(buildUserObj());
+            // } else if (!validImage) {
+            //     highlightPhotoField();
+            //     scroll();
+            // } else {
+            //     scroll();
+            // }
         });
     </script>
 </body>
