@@ -18,34 +18,27 @@ body {
 /* Home btn */
 
 #nav-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    position: absolute;
+    top: 0;
+    left: -40px;
     display: flex;
     flex-flow: column nowrap;
     z-index: 10;
 }
 
 .nav-button i {
-    color: rgba(161, 107, 255, 0.25);
+    color: rgba(0, 0, 0, 0.15);
     font-size: 18px;
     margin-bottom: 12px;
     transition: color 200ms ease-in-out;
 }
 
-.nav-button:hover i {
-    color: rgba(161, 107, 255, 0.9);
+.nav-button i:hover {
+    color: #a16bff;
 }
 
-.inverse i {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 18px;
-    margin-bottom: 12px;
-    transition: color 200ms ease-in-out;
-}
-
-.inverse:hover i {
-    color: rgba(255, 255, 255, 0.9);
+#nav-container[data-margin="1"] {
+    top: 20px;
 }
 
 /* Main styling */
@@ -59,6 +52,7 @@ body {
     width: 672px;
     height: auto;
 
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
 
@@ -138,6 +132,9 @@ p {
 #survey-div {
     width: 672px;
     height: auto;
+    min-height: 100vh;
+
+    position: relative;
 
     box-shadow: 15px 0 25px rgba(161, 107, 255, 0.30);
 }
@@ -160,11 +157,11 @@ p {
 }
 
 .red::after {
-    color: rgb(207, 41, 44) !important;
+    color: rgb(167, 48, 113) !important;
 }
 
 .required-field h2::after {
-    content: attr(data-content);
+    content: "Required";
     font-size: 12px;
     font-weight: 400;
     color: rgba(255,255,255,0.5);

@@ -35,8 +35,6 @@ function compare(userData) {
 
 function displayResults(chosenFriend, matchScore) {
 
-    $(".nav-button").addClass("inverse");
-
     matchScore = 100 - matchScore;
 
     const page = $("#survey-body");
