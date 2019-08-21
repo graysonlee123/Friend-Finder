@@ -253,3 +253,38 @@ p {
 .results-p {
     margin-bottom: 24px;
 }
+
+
+
+/* Mobile */
+
+@media screen and (max-width: 680px) {
+    #home-div, #survey-div {
+        width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    #nav-container {
+        top: 30px;
+        right: 30px;
+        left: unset;
+    }
+
+    #nav-container[data-margin="1"] {
+        top: inherit;
+    }
+
+    .nav-button i {
+        color: rgba(255,255,255,0.3);
+        font-size: 14px;
+    }
+    
+    .nav-button:hover i {
+        color: rgba(255,255,255,0.8);
+    }
+
+    #survey-h1 {
+        padding-right: 40px;
+    }
+}
