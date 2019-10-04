@@ -2,8 +2,6 @@ const db = require("../../models");
 const errMsg = "There was an error with that query!";
 const okMsg = "Success!";
 
-console.log(db);
-
 module.exports = function(app) {
   // Create
   app.post("/api/friends", (req, res) => {

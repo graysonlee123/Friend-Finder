@@ -1,10 +1,34 @@
+// Set some variables
+let questions;
+
+const options = [
+    'Strongly agree',
+    'Agree',
+    'Neutral',
+    'Disagree',
+    'Strongly disagree'
+];
+
+// // Run on page load
+fetchAndDisplayQuestions();
+
+async function fetchAndDisplayQuestions() {
+    const questions = await $.getJSON('/data/questions.json').catch(() => {
+        console.log('There was an error loading in questions.json!');
+    });
+
+    if (questions) {
+        generateSurvey(questions);
+    }
+}
+
 function calculateMatch(userAnswers) {
     // Compare method here
     console.log(userAnswers);
     compare(userAnswers);
     // And post the user's data to the friends api page
     $.post("api/friends", userAnswers);
-};
+}
 
 function compare(userData) {
     $.get("/api/friends", function (data) {
@@ -31,7 +55,7 @@ function compare(userData) {
         });
         displayResults(chosenFriend, lowestDifference);
     });
-};
+}
 
 function displayResults(chosenFriend, matchScore) {
 
@@ -58,4 +82,34 @@ function displayResults(chosenFriend, matchScore) {
     resutlsOverlay.append(resultsContainer);
 
     page.append(resutlsOverlay);
+}
+
+function generateSurvey(questions) {
+    const $textFields = $('#info-container');
+    const $questions = $('#questions-container');
+
+    $textFields.append(
+        `<div class="text-input-box survey-row">
+            <label for="name-input" class="label required-field"><h2 id="required-name-input">Name</h2></label>
+            <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+        </div>`
+    );
+
+    questions.forEach((question, i) => {
+        const $container = $(`<div class="question-box survey-row">`);
+        const $label = $(`<label for="question-${i}" class="label">`);
+        const $options = $(`<select name="question-${i}" id="question-${i}" class="dropdown">`);
+        
+        $label.append($(`<h2>Question ${i + 1}</h2>`), $(`<p>${question.question}</p>`));
+
+        options.forEach((option, i) => {
+            if (option === "Neutral") $options.append($(`<option value="${i}" selected>${option}</option>`));
+            else $options.append($(`<option value="${i}">${option}</option>`));
+        });
+
+        $container.append($label);
+        $container.append($options);
+
+        $questions.append($container);
+    });
 }
