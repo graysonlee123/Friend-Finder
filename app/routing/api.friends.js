@@ -8,7 +8,6 @@ module.exports = function(app) {
   // Create
   app.post("/api/friends", (req, res) => {
     const { name, scores } = req.body;
-
     const newFriend = {
       name: name,
       dateCreated: Date.now(),
@@ -48,15 +47,23 @@ module.exports = function(app) {
   app.put("/api/friends/:id", (req, res) => {
     const { name, scores } = req.body;
 
-    db.Friend.findByIdAndUpdate(req.params.id, {
-      name: name,
-      scores: scores
-    }, {new: true})
+    db.Friend.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: name,
+        scores: scores
+      },
+      {
+        new: true,
+        omitUndefined: true,
+        runValidators: true
+      }
+    )
       .then(dbFriend => {
         res.json({
           msg: okMsg,
           failed: 0,
-          body: dbFriend, 
+          body: dbFriend
         });
       })
       .catch(err => {
