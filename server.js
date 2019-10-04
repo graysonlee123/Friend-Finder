@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/friend-match', {useNewUrlParser: true});
 const db = mongoose.connection;
 
 require('./app/routing/api.friends')(app);
-require('./app/routing/htmlRoutes')(app);
+require('./app/routing/routes.html')(app);
 
 const PORT = process.env.PORT || 8000;
 

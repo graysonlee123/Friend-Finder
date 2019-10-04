@@ -9,9 +9,10 @@ const options = [
     'Strongly disagree'
 ];
 
-// // Run on page load
+// Run on page load
 fetchAndDisplayQuestions();
 
+// Survey functions
 async function fetchAndDisplayQuestions() {
     const questions = await $.getJSON('/data/questions.json').catch(() => {
         console.log('There was an error loading in questions.json!');
