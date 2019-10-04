@@ -1,18 +1,12 @@
 # Friend Match
 
-Full-stack app to match with common friends based on a survey. 
+### Visit the deployed link [here](https://protected-forest-51687.herokuapp.com/)
 
-## Getting Started
-
-Visit the deployed link [here](https://protected-forest-51687.herokuapp.com/).
-
-If the link is invalid, clone the repo locally and run `npm install` in the folder. Then run the server using `node server.js`. 
+Full-stack app to match with common friends based on a personality survey. 
 
 ## Built With
 
-* jQuery
-* Node
-* [Express](https://www.npmjs.com/package/express) - Used to create, run, and route the server
+jQuery | Node | [Express](https://www.npmjs.com/package/express) | MongoDB | Mongoose
 
 ## Authors
 
