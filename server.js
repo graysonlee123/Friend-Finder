@@ -8,12 +8,18 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, './app/public')));
 
 mongoose.connect('mongodb://localhost/friend-match', {useNewUrlParser: true});
+const db = mongoose.connection;
 
-require('./app/routing/apiRoutes')(app);
+require('./app/routing/api.friends')(app);
 require('./app/routing/htmlRoutes')(app);
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, function () {
-    console.log('App listening on PORT: ' + PORT);
+db.on('error', console.error.bind(console, 'connection error:'));
+db.on('open', () => {
+    console.log('Connected to the database!');
+
+    app.listen(PORT, function () {
+        console.log('App listening on PORT: ' + PORT);
+    });
 });
