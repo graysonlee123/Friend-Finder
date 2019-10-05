@@ -61,22 +61,55 @@ const survey = {
 
     async gatherAndPushResults() {
         const scores = [];
+        const body = {};
 
         $('.dropdown').each(function() {
             scores.push($(this).val() || '0');
         });
 
+        body.scores = scores;
+        body.name = 'bob';
+
         const postData = await $.ajax({
             url: '/api/friends',
             method: 'POST',
-            data: {
-                name: 'todd',
-                scores: scores
-            }
-        }).catch((err) => console.log("Error posting scores!", err));
+            data: body
+        })
+        .catch(err => console.log("Error posting scores!", err));
 
         if (postData) {
-            console.log('pushed!');
+            console.log('pushed! calculating match...');
+            this.calculateMatch(postData);
+        }
+    },
+
+    async calculateMatch(postedFriend) {
+        const potentialFriends = await $.ajax({
+            url: '/api/friends',
+            method: 'GET'
+        }).catch(err => console.log('error fetching all friends!', err));
+
+        if (potentialFriends) {
+            console.log(potentialFriends, postedFriend, 'calculating match...');
+            let lowestDifference = 100;
+            let bestMatch;
+
+            potentialFriends.forEach(potentialFriend => {
+                if (potentialFriend._id === postedFriend.body._id) return console.log('ignoring match!');
+
+                let differenceTotal = 0;
+
+                potentialFriend.scores.forEach((score, i) => {
+                    differenceTotal += Math.abs(score - postedFriend.body.scores[i]);
+                });
+
+                if (differenceTotal < lowestDifference) {
+                    lowestDifference = differenceTotal;
+                    bestMatch = potentialFriend;
+                }
+            });
+
+            document.location.href = `/results?userId=${postedFriend.body._id}&matchId=${bestMatch._id}`
         }
     }
 }
