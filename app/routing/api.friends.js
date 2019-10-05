@@ -40,6 +40,17 @@ module.exports = function(app) {
         res.status(400).json({ msg: errMsg });
       });
   });
+  
+  app.get("/api/friends/:id", (req, res) => {
+    db.Friend.findById(req.params.id)
+      .then(dbFriend => {
+        res.json(dbFriend);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).json({ msg: errMsg });
+      });
+  });
 
   // Update
   app.put("/api/friends/:id", (req, res) => {
