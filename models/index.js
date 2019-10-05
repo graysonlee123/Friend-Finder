@@ -1,3 +1,4 @@
 module.exports = {
-    Friend: require('./Friend')
+    Friend: require('./Friend'),
+    Image: require('./Image')
 }

@@ -6,11 +6,13 @@ const mongoose = require('mongoose');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './app/public')));
+app.use('/uploads', express.static('uploads'));
 
 mongoose.connect('mongodb://localhost/friend-match', {useNewUrlParser: true});
 const db = mongoose.connection;
 
 require('./app/routing/api.friends')(app);
+require('./app/routing/api.images')(app);
 require('./app/routing/routes.html')(app);
 
 const PORT = process.env.PORT || 8000;

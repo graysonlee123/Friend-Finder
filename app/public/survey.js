@@ -71,8 +71,13 @@ const survey = {
             scores.push($(this).val() || '0');
         });
 
+        const profileImage = $('#profile-image-img').attr('src');
+
         body.scores = scores;
         body.name = $('#name-input').val();
+        body.profileImage = profileImage;
+
+        console.log(body);
 
         const postData = await $.ajax({
             url: '/api/friends',
@@ -147,4 +152,37 @@ $(document).on('click', '#submit-button', function (e) {
     e.preventDefault();
     survey.gatherAndPushResults();
     // if (checkInputs()) calculateMatch(buildUserObj());
+});
+
+// Handles the profile image upload
+$(document).on('change', '#profile-image', event => {
+    event.preventDefault();
+
+    let imageFormObj = new FormData();
+
+    imageFormObj.append('imageName', `multer-image-${Date.now()}`);
+    imageFormObj.append('imageData', event.target.files[0]);
+
+    console.log(imageFormObj.getAll('imageData'));
+    console.log(event.target.files);
+
+    $.ajax({
+        url: '/uploadmulter', 
+        method: 'POST',
+        data: imageFormObj,
+        processData: false,
+        contentType: false
+    })
+    .then(data => {
+        console.log(data)
+        if (data.success) {
+            alert("image has been succesfully uploaded using multer");
+            console.log(data.document.imageData)
+            $('#profile-image-img').attr('src', data.document.imageData);
+        }
+    })
+    .catch(err => {
+        alert('Error while uploading image using multer.');
+        console.log(err);
+    })
 });

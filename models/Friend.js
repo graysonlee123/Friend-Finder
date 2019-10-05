@@ -12,6 +12,10 @@ const FriendSchema = new mongoose.Schema({
     scores: {
         type: Array,
         required: true
+    },
+    profileImage: {
+        type: String,
+        required: true
     }
 });
 
