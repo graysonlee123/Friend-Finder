@@ -14,6 +14,7 @@
 
     <script src="https://kit.fontawesome.com/712551befc.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="index.js"></script>
 </head>
 
 <body id="survey-body">
@@ -34,68 +35,6 @@
             <button id="submit-button" class="button">Submit Answers</button>
         </form>
     </div>
-
-    <script src="index.js"></script>
-    <script>
-        const nameInputContainer = $("#required-name-input");
-        const photoInputContainer = $("#required-photo-url-input");
-
-        let nameValue = null;
-        let photoValue = null;
-
-        let validImage = false;
-        let validName = false;
-
-        function buildUserObj() {
-
-            const scores = [];
-            $(".dropdown").each(function (index) {
-                const value = $(this).val();
-                scores.push($(this).val() || 0);
-            });
-            return {
-                name: nameValue,
-                photo: photoValue,
-                scores: scores
-            };
-        };
-
-        function highlightNameField() {
-            nameInputContainer.addClass("red");
-        };
-
-        function highlightPhotoField() {
-            photoInputContainer.addClass("red");
-        };
-
-        function refreshFieldHighlights() {
-            nameInputContainer.removeClass("red");
-            photoInputContainer.removeClass("red");
-        };
-
-        function scroll() {
-            $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-        };
-
-        function checkInputs() {
-            nameValue = $("#name-input").val();
-            photoValue = $("#photo-url-input").val();
-
-            if (!nameValue) highlightNameField();
-            if (!photoValue) highlightPhotoField();
-
-            if (photoValue && nameValue) return true;
-            scroll();
-            return false;
-
-        };
-
-        $("#submit-button").on("click", function (e) {
-            e.preventDefault();
-            refreshFieldHighlights();
-            if (checkInputs()) calculateMatch(buildUserObj());
-        });
-    </script>
 </body>
 
 </html>
