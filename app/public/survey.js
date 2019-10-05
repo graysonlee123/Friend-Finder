@@ -68,7 +68,7 @@ const survey = {
         });
 
         body.scores = scores;
-        body.name = 'bob';
+        body.name = $('#name-input').val();
 
         const postData = await $.ajax({
             url: '/api/friends',
@@ -109,7 +109,12 @@ const survey = {
                 }
             });
 
-            document.location.href = `/results?userId=${postedFriend.body._id}&matchId=${bestMatch._id}`
+            if (!bestMatch) {
+                alert('Sorry! There were no matches found for you. Maybe nobody has used the app yet?');
+                return window.location.href = '/';
+            }
+
+            document.location.href = `/results?userId=${postedFriend.body._id}&matchId=${bestMatch._id}&score=${100 - lowestDifference}`
         }
     }
 }
