@@ -29,6 +29,10 @@ const survey = {
             `<div class="text-input-box survey-row">
                 <label for="name-input" class="label required-field"><h2 id="required-name-input">Name</h2></label>
                 <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+            </div>
+            <div class="text-input-box survey-row">
+                <label for="email-input" class="label required-field"><h2 id="required-email-input">Email</h2></label>
+                <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
             </div>`
         );
     
