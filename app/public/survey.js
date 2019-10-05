@@ -22,19 +22,7 @@ const survey = {
     },
 
     generateSurvey(questions) {
-        const $textFields = $('#info-container');
         const $questions = $('#questions-container');
-    
-        $textFields.append(
-            `<div class="text-input-box survey-row">
-                <label for="name-input" class="label required-field"><h2 id="required-name-input">Name</h2></label>
-                <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
-            </div>
-            <div class="text-input-box survey-row">
-                <label for="email-input" class="label required-field"><h2 id="required-email-input">Email</h2></label>
-                <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
-            </div>`
-        );
     
         questions.forEach((question, i) => {
             const $container = $(`<div class="question-box survey-row">`);
@@ -55,10 +43,6 @@ const survey = {
         });
     },
 
-    calculateMatch() {
-        console.log("hello");
-    },
-
     badInputFeedback(elementId) {
         console.log(elementId);
     },
@@ -76,15 +60,29 @@ const survey = {
         body.scores = scores;
         body.name = $('#name-input').val();
         body.profileImage = profileImage;
-
-        console.log(body);
-
+        
         const postData = await $.ajax({
             url: '/api/friends',
             method: 'POST',
             data: body
         })
-        .catch(err => console.log("Error posting scores!", err));
+        .catch(err => {
+            console.log("Error posting scores!", err);
+            const {responseJSON: resjson} = err;
+
+            if (resjson.error.errors) {
+                const {path} = resjson.error.errors.name;
+                const $label = $(`#${path}-input`).siblings(`[for="${path}-input"`).children('h2');
+
+                console.log($label);
+                
+                $label.attr('data-content', 'Custom Error Message!');
+
+                setTimeout(() => {
+                    $label.attr('data-content', 'Required');
+                }, 3000);
+            }
+        });
 
         if (postData) {
             console.log('pushed! calculating match...');
@@ -151,7 +149,6 @@ survey.fetchAndDisplayQuestions();
 $(document).on('click', '#submit-button', function (e) {
     e.preventDefault();
     survey.gatherAndPushResults();
-    // if (checkInputs()) calculateMatch(buildUserObj());
 });
 
 // Handles the profile image upload

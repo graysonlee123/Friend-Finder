@@ -27,9 +27,24 @@
         </div>
 
         <h1 id="survey-h1">Survey Time</h1>
-        <input type="file" id="profile-image">
-        <img src="http://via.placeholder.com/200" id="profile-image-img" alt="profile-image">
         <form action="" class="survey-form-container">
+            <div class="profile-image-wrapper survey-row">
+                <div class="left">
+                    <img src="http://via.placeholder.com/200" id="profile-image-img" alt="profile-image">
+                </div>
+                <div class="right">
+                    <label for="email-input" class="label required-field"><h2 id="required-email-input" data-content="Required">Picture of You</h2></label>
+                    <input type="file" id="profile-image" class="choose-file-btn">
+                </div>
+            </div>
+            <div class="text-input-box survey-row">
+                <label for="name-input" class="label required-field"><h2 id="required-name-input" data-content="Required">Name</h2></label>
+                <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+            </div>
+            <div class="text-input-box survey-row">
+                <label for="email-input" class="label required-field"><h2 id="required-email-input" data-content="Required">Email</h2></label>
+                <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
+            </div>
             <div id="info-container">
             </div>
             <hr class="main-hr">
