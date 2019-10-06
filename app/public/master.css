@@ -265,7 +265,6 @@ p {
 
 .profile-image-wrapper .right {
     flex-grow: 1;
-    padding: 16px;
 }
 
 .profile-image-wrapper .left img {
@@ -274,8 +273,8 @@ p {
     object-fit: cover;
 }
 
-.choose-file-btn {
-
+#profile-image-img {
+    border-radius: 100px;
 }
 
 /* Mobile */

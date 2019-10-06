@@ -5,12 +5,13 @@ const okMsg = "Success!";
 module.exports = function(app) {
   // Create
   app.post("/api/friends", (req, res) => {
-    const { name, scores, profileImage } = req.body;
+    const { name, scores, profileImage, email } = req.body;
     const newFriend = {
       name: name,
       dateCreated: Date.now(),
       scores: scores,
-      profileImage: profileImage
+      profileImage: profileImage,
+      email: email
     };
 
     db.Friend.create(newFriend)

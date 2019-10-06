@@ -1,5 +1,6 @@
 // Set some variables
 let questions;
+let profileImage;
 
 const options = [
     'Strongly agree',
@@ -43,23 +44,27 @@ const survey = {
         });
     },
 
-    badInputFeedback(elementId) {
-        console.log(elementId);
+    clearLabels() {
+        $('.label.required-field').children('h2').each(function() {
+            $(this).attr('data-content', 'Required');
+            $(this).css('color', 'inherit');
+        });
     },
 
     async gatherAndPushResults() {
         const scores = [];
         const body = {};
 
+        this.clearLabels();
+
         $('.dropdown').each(function() {
             scores.push($(this).val() || '0');
         });
 
-        const profileImage = $('#profile-image-img').attr('src');
-
         body.scores = scores;
         body.name = $('#name-input').val();
         body.profileImage = profileImage;
+        body.email = $('#email-input').val();
         
         const postData = await $.ajax({
             url: '/api/friends',
@@ -68,24 +73,25 @@ const survey = {
         })
         .catch(err => {
             console.log("Error posting scores!", err);
-            const {responseJSON: resjson} = err;
+            const {errors} = err.responseJSON.error;
 
-            if (resjson.error.errors) {
-                const {path} = resjson.error.errors.name;
-                const $label = $(`#${path}-input`).siblings(`[for="${path}-input"`).children('h2');
+            // turn the object of errors into an array
+            const errorsArr = Object.keys(errors).map(i => errors[i]);
 
-                console.log($label);
-                
-                $label.attr('data-content', 'Custom Error Message!');
+            if (errorsArr) {
+                $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 500);
 
-                setTimeout(() => {
-                    $label.attr('data-content', 'Required');
-                }, 3000);
+                errorsArr.forEach(error => {
+                    const {path} = error;
+                    const $label = $(`label[for="${path}-input"`).children('h2');
+
+                    $label.attr('data-content', error.message);
+                    $label.css('color', 'red');
+                });
             }
         });
 
         if (postData) {
-            console.log('pushed! calculating match...');
             this.calculateMatch(postData);
         }
     },
@@ -126,22 +132,6 @@ const survey = {
     }
 }
 
-function scroll() {
-    $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-}
-
-function checkInputs() {
-    nameValue = $("#name-input").val();
-
-    if (!nameValue) {
-        highlightNameField();
-        scroll();
-        return false;
-    } else {
-        return true;
-    }
-}
-
 // Run on page load
 survey.fetchAndDisplayQuestions();
 
@@ -160,9 +150,6 @@ $(document).on('change', '#profile-image', event => {
     imageFormObj.append('imageName', `multer-image-${Date.now()}`);
     imageFormObj.append('imageData', event.target.files[0]);
 
-    console.log(imageFormObj.getAll('imageData'));
-    console.log(event.target.files);
-
     $.ajax({
         url: '/uploadmulter', 
         method: 'POST',
@@ -171,15 +158,19 @@ $(document).on('change', '#profile-image', event => {
         contentType: false
     })
     .then(data => {
-        console.log(data)
+        console.log(data);
+
         if (data.success) {
-            alert("image has been succesfully uploaded using multer");
-            console.log(data.document.imageData)
+            console.log("Succesfully uploaded the image!", data.document.imageData);
+
             $('#profile-image-img').attr('src', data.document.imageData);
+            $('#profile-image-img').css('visibility', 'visible');
+            
+            profileImage = data.document.imageData;
         }
     })
     .catch(err => {
-        alert('Error while uploading image using multer.');
         console.log(err);
+        alert('Error while uploading your image. Please try a different image. Accepts only JPG or PNG.');
     })
 });
