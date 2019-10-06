@@ -18,30 +18,26 @@ const survey = {
         });
     
         if (questions) {
-            this.generateSurvey(questions);
-        }
-    },
-
-    generateSurvey(questions) {
-        const $questions = $('#questions-container');
+            const $questions = $('#questions-container');
     
-        questions.forEach((question, i) => {
-            const $container = $(`<div class="question-box survey-row">`);
-            const $label = $(`<label for="question-${i}" class="label">`);
-            const $options = $(`<select name="question-${i}" value="0" id="question-${i}" class="dropdown">`);
-            
-            $label.append($(`<h2>Question ${i + 1}</h2>`), $(`<p>${question.question}</p>`));
-    
-            options.forEach((option, i) => {
-                if (option === "Neutral") $options.append($(`<option value="${i}" selected>${option}</option>`));
-                else $options.append($(`<option value="${i}">${option}</option>`));
+            questions.forEach((question, i) => {
+                const $container = $(`<div class="question-box survey-row">`);
+                const $label = $(`<label for="question-${i}" class="label">`);
+                const $options = $(`<select name="question-${i}" value="0" id="question-${i}" class="dropdown">`);
+                
+                $label.append($(`<h2>Question ${i + 1}</h2>`), $(`<p>${question.question}</p>`));
+        
+                options.forEach((option, i) => {
+                    if (option === "Neutral") $options.append($(`<option value="${i}" selected>${option}</option>`));
+                    else $options.append($(`<option value="${i}">${option}</option>`));
+                });
+        
+                $container.append($label);
+                $container.append($options);
+        
+                $questions.append($container);
             });
-    
-            $container.append($label);
-            $container.append($options);
-    
-            $questions.append($container);
-        });
+        }
     },
 
     clearLabels() {

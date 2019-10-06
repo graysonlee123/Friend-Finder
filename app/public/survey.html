@@ -29,21 +29,25 @@
         <h1 id="survey-h1">Survey Time</h1>
         <form action="" class="survey-form-container">
             <div class="profile-image-wrapper survey-row">
-                <div class="right">
+                <div class="left">
                     <label for="profileImage-input" class="label required-field"><h2 id="required-profileImage-input" data-content="Required">Picture of You</h2></label>
                     <input type="file" id="profile-image" class="choose-file-btn">
+                    
+                    <label for="name-input" class="label required-field"><h2 id="required-name-input" data-content="Required">Name</h2></label>
+                    <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+
+                    <label for="email-input" class="label required-field"><h2 id="required-email-input" data-content="Required">Email</h2></label>
+                    <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
                 </div>
-                <div class="left">
+                <div class="right">
                     <img src="/uploads/default.jpg" id="profile-image-img" alt="profile-image" style="visibility: hidden">
                 </div>
             </div>
             <div class="text-input-box survey-row">
-                <label for="name-input" class="label required-field"><h2 id="required-name-input" data-content="Required">Name</h2></label>
-                <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+                
             </div>
             <div class="text-input-box survey-row">
-                <label for="email-input" class="label required-field"><h2 id="required-email-input" data-content="Required">Email</h2></label>
-                <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
+                
             </div>
             <div id="info-container">
             </div>
