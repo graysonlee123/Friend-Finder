@@ -48,7 +48,11 @@ module.exports = function(app) {
                 .catch(err => next(err));
         });
     
-    app.get('./uploads/:file', (req, res) => {
+    app.get('/uploads', (req, res) => {
+        res.json('Must provide a file name!').status(404);
+    });
+
+    app.get('/uploads/:file', (req, res) => {
         res.sendFile('/uploads/' + req.params.file);
     });
 }
