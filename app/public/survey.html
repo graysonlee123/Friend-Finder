@@ -7,97 +7,52 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Friend Match</title>
 
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="master.css">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,900&display=swap" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/712551befc.js"></script>
-
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="master.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="survey.js"></script>
 </head>
 
 <body id="survey-body">
-
     <div id="survey-div" class="gradient-bg">
         <div id="nav-container" data-margin = "1">
             <a href="/" class="nav-button"><i class="fas fa-home"></i></a>
-            <a href="/api/friends" class="nav-button"><i class="fas fa-list"></i></i></a>
             <a href="http://github.com/graysonlee123" class="nav-button"><i class="fab fa-github"></i></a>
         </div>
 
-        <h1 id="survey-h1">Survey Time</h1>
+        <h1 id="survey-h1">Tell me about yourself.</h1>
         <form action="" class="survey-form-container">
-            <div id="info-container"></div>
+            <div class="profile-image-wrapper">
+                <div class="left">
+                    <label for="profileImage-input" class="label required-field"><h2 id="required-profileImage-input" data-content="Required">Picture of You</h2></label>
+                    <label for="profile-image" class="file-upload-button-fake">
+                        <input type="file" id="profile-image" class="file-upload-button">
+                        <span>
+                            Upload your Photo&nbsp;<i class="fas fa-file-image"></i>
+                        </span>
+                    </label>
+                    
+                    <label for="name-input" class="label required-field"><h2 id="required-name-input" data-content="Required">Name</h2></label>
+                    <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
+
+                    <label for="email-input" class="label required-field"><h2 id="required-email-input" data-content="Required">Email</h2></label>
+                    <input type="text" id="email-input" class="text-input" placeholder="johnny@appleseed.com">
+                </div>
+                <div class="right">
+                    <img src="/uploads/default.jpg" id="profile-image-img" alt="profile-image" style="visibility: hidden">
+                    <p id="profile-image-subtitle" style="text-align: center; margin-top: 12px; visibility: hidden; color: rgba(255,255,255,0.5);">Your Friend-Match Image</p>
+                </div>
+            </div>
             <hr class="main-hr">
             <div id="questions-container"></div>
             <hr class="main-hr">
             <button id="submit-button" class="button">Submit Answers</button>
         </form>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="questions.js"></script>
-    <script src="generateSurvey.js"></script>
-    <script src="calculateMatch.js"></script>
-    <script>
-        const nameInputContainer = $("#required-name-input");
-        const photoInputContainer = $("#required-photo-url-input");
-
-        let nameValue = null;
-        let photoValue = null;
-
-        let validImage = false;
-        let validName = false;
-
-        function buildUserObj() {
-
-            const scores = [];
-            $(".dropdown").each(function (index) {
-                const value = $(this).val();
-                scores.push($(this).val() || 0);
-            });
-            return {
-                name: nameValue,
-                photo: photoValue,
-                scores: scores
-            };
-        };
-
-        function highlightNameField() {
-            nameInputContainer.addClass("red");
-        };
-
-        function highlightPhotoField() {
-            photoInputContainer.addClass("red");
-        };
-
-        function refreshFieldHighlights() {
-            nameInputContainer.removeClass("red");
-            photoInputContainer.removeClass("red");
-        };
-
-        function scroll() {
-            $("html, body").animate({ scrollTop: $('#survey-div').offset().top }, 1000);
-        };
-
-        function checkInputs() {
-            nameValue = $("#name-input").val();
-            photoValue = $("#photo-url-input").val();
-
-            if (!nameValue) highlightNameField();
-            if (!photoValue) highlightPhotoField();
-
-            if (photoValue && nameValue) return true;
-            scroll();
-            return false;
-
-        };
-
-        $("#submit-button").on("click", function (e) {
-            e.preventDefault();
-            refreshFieldHighlights();
-            if (checkInputs()) calculateMatch(buildUserObj());
-        });
-    </script>
 </body>
 
 </html>
