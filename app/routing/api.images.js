@@ -1,7 +1,8 @@
 const express = require('express');
 const Image = require('../../models/Image');
 const ImageRouter = express.Router();
-const multer = require('multer')
+const multer = require('multer');
+const fs = require('fs');
 
 module.exports = function(app) {
     const storage = multer.diskStorage({
@@ -46,4 +47,8 @@ module.exports = function(app) {
                 })
                 .catch(err => next(err));
         });
+    
+    app.get('./uploads/:file', (req, res) => {
+        res.sendFile('/uploads/' + req.params.file);
+    });
 }
