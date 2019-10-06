@@ -20,7 +20,7 @@ function displayFriendInfo(friend) {
     $('#friend-info').append(
         `<h1>${friend.name}</h1>
         <div class="results-flex">
-            <img src="${friend.profileImage}" alt="your match">
+            <img src="${friend.profileImage}" alt="your match" onerror="this.src='uploads/default.jpg';">
             <div class="results-details">
                 <p>Your match score:</p>
                 <h2>${score}</h2>
