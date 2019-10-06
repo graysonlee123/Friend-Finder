@@ -18,8 +18,13 @@ async function getFriend() {
 function displayFriendInfo(friend) {
     $('#friend-info').append(
         `<h1>${friend.name}</h1>
-        <img src="http://via.placeholder.com/200x200">
-        <p>Your match score: ${score}%</p>
-        <a href="mailto:person@email.com">Get in Touch!</a>`
+        <div class="results-flex">
+            <img src="http://via.placeholder.com/200x200">
+            <div class="results-details">
+                <p>Your match score:</p>
+                <h2>${score}</h2>
+                <a class="button" href="mailto:someone@yoursite.com?subject=We Matched on Friend Match!">Get in Touch!</a>
+            </div>
+        </div>`
     )
 }

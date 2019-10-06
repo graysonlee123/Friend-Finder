@@ -317,6 +317,46 @@ p {
     display: none;
 }
 
+#results-div {
+    text-align: center;
+    width: 600px;
+    border-radius: 6px;
+    position: relative;
+}
+
+#friend-info h1 {
+    word-break: break-all;
+}
+
+.results-flex {
+    display: flex;
+}
+
+.results-flex img {
+    border-radius: 200px;
+}
+
+.results-details {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.results-details h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.results-details h2::after {
+    content: '%';
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.results-details a.button {
+    margin-top: auto;
+}
+
 .flash-color {
     animation-duration: 300ms;
     animation-name: flash;
