@@ -319,13 +319,13 @@ p {
 
 #results-div {
     text-align: center;
-    width: 600px;
+    min-width: 600px;
     border-radius: 6px;
     position: relative;
 }
 
 #friend-info h1 {
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .results-flex {
@@ -334,6 +334,10 @@ p {
 
 .results-flex img {
     border-radius: 200px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 100px;
 }
 
 .results-details {
@@ -411,5 +415,29 @@ p {
 
     .profile-image-wrapper .right {
         max-width: 100%;
+    }
+
+    .results-flex {
+        display: block;
+    }
+
+    #results-div {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        min-width: unset;
+    }
+
+    #results-body {
+        width: 100%;
+        height: 100vh;
+    }
+
+    #friend-info h1 {
+        font-size: 2rem;
+    }
+
+    .results-flex img {
+        margin-bottom: 16px;
     }
 }

@@ -16,10 +16,11 @@ async function getFriend() {
 }
 
 function displayFriendInfo(friend) {
+    console.log(friend);
     $('#friend-info').append(
         `<h1>${friend.name}</h1>
         <div class="results-flex">
-            <img src="http://via.placeholder.com/200x200">
+            <img src="${friend.profileImage}" alt="your match">
             <div class="results-details">
                 <p>Your match score:</p>
                 <h2>${score}</h2>
