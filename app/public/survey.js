@@ -82,7 +82,11 @@ const survey = {
                     const $label = $(`label[for="${path}-input"`).children('h2');
 
                     $label.attr('data-content', error.message);
-                    $label.css('color', 'red');
+                    $label.addClass('flash-color');
+
+                    setTimeout(() => {
+                        $label.removeClass('flash-color');
+                    }, 3000);
                 });
             }
         });
@@ -100,6 +104,7 @@ const survey = {
 
         if (potentialFriends) {
             console.log(potentialFriends, postedFriend, 'calculating match...');
+
             let lowestDifference = 100;
             let bestMatch;
 
@@ -161,12 +166,14 @@ $(document).on('change', '#profile-image', event => {
 
             $('#profile-image-img').attr('src', data.document.imageData);
             $('#profile-image-img').css('visibility', 'visible');
+
+            $('#profile-image-subtitle').css('visibility', 'visible');
             
             profileImage = data.document.imageData;
         }
     })
     .catch(err => {
         console.log(err);
-        alert('Error while uploading your image. Please try a different image. Accepts only JPG or PNG.');
+        alert('Error while uploading your image. Please try a different image. Accepts only JPG or PNG, or try using a smaller file size.');
     })
 });

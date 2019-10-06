@@ -160,7 +160,7 @@ p {
     content: attr(data-content);
     font-size: 12px;
     font-weight: 400;
-    color: rgba(255,255,255,0.5);
+    color: inherit;
     margin-left: 10px;
 }
 
@@ -171,6 +171,11 @@ p {
     border: none;
     border-radius: 4px;
     color: rgba(0,0,0,0.5);
+    box-shadow: 1px 4px 4px rgba(0,0,0,0.2);
+}
+
+.text-input::placeholder {
+    color: rgba(0,0,0,0.3);
 }
 
 .main-hr {
@@ -187,6 +192,7 @@ p {
     border: none;
     color: rgba(0,0,0,0.5);
     background-color: white;
+    box-shadow: 1px 4px 4px rgba(0,0,0,0.2);
 }
 
 .dropdown option {
@@ -255,7 +261,6 @@ p {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    height: 140px;
 }
 
 .profile-image-wrapper .right {
@@ -280,6 +285,48 @@ p {
 
 #profile-image-img {
     border-radius: 100px;
+    height: 140px;
+}
+
+.file-upload-button-fake {
+    display: inline-block;
+    padding: 10px 12px;
+    cursor: pointer;
+    background-color: white;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    transition: all 300ms ease-in-out;
+    box-shadow: 1px 4px 4px rgba(0,0,0,0.2);
+}
+
+.file-upload-button-fake:hover {
+    transform: translateY(2px);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1)
+}
+
+.file-upload-button-fake span, .file-upload-button-fake span i {
+    color: rgba(0,0,0,0.7);
+}
+
+.file-upload-button {
+    display: none;
+}
+
+.flash-color {
+    animation-duration: 300ms;
+    animation-name: flash;
+    animation-iteration-count: 2;
+    animation-delay: 600ms;
+}
+
+@keyframes flash {
+    from {
+        color: #FD7073;
+    }
+    to {
+        color: inherit;
+    }
 }
 
 /* Mobile */

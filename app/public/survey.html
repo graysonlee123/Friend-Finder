@@ -18,7 +18,6 @@
 </head>
 
 <body id="survey-body">
-
     <div id="survey-div" class="gradient-bg">
         <div id="nav-container" data-margin = "1">
             <a href="/" class="nav-button"><i class="fas fa-home"></i></a>
@@ -28,10 +27,15 @@
 
         <h1 id="survey-h1">Survey Time</h1>
         <form action="" class="survey-form-container">
-            <div class="profile-image-wrapper survey-row">
+            <div class="profile-image-wrapper">
                 <div class="left">
                     <label for="profileImage-input" class="label required-field"><h2 id="required-profileImage-input" data-content="Required">Picture of You</h2></label>
-                    <input type="file" id="profile-image" class="choose-file-btn">
+                    <label for="profile-image" class="file-upload-button-fake">
+                        <input type="file" id="profile-image" class="file-upload-button">
+                        <span>
+                            Upload your Photo&nbsp;<i class="fas fa-file-image"></i>
+                        </span>
+                    </label>
                     
                     <label for="name-input" class="label required-field"><h2 id="required-name-input" data-content="Required">Name</h2></label>
                     <input type="text" id="name-input" class="text-input" placeholder="Johnny Appleseed">
@@ -41,15 +45,8 @@
                 </div>
                 <div class="right">
                     <img src="/uploads/default.jpg" id="profile-image-img" alt="profile-image" style="visibility: hidden">
+                    <p id="profile-image-subtitle" style="text-align: center; margin-top: 12px; visibility: hidden; color: rgba(255,255,255,0.5);">Your Friend-Match Image</p>
                 </div>
-            </div>
-            <div class="text-input-box survey-row">
-                
-            </div>
-            <div class="text-input-box survey-row">
-                
-            </div>
-            <div id="info-container">
             </div>
             <hr class="main-hr">
             <div id="questions-container"></div>
