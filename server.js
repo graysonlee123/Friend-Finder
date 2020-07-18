@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 8000;
 const db = mongoose.connection;
-const {NODE_ENV, TEST_DB, DEVELOPMENT_DB, MONGODB_URI} = process.env;
+const {NODE_ENV, TEST_DB, DEVELOPMENT_DB, DB_URI} = process.env;
 
 let dbString;
 
@@ -17,7 +17,7 @@ app.use('/uploads', express.static('uploads'));
 
 if (NODE_ENV === 'test') dbString = TEST_DB;
 else if (NODE_ENV === 'development') dbString = DEVELOPMENT_DB;
-else if (NODE_ENV === 'production') dbString = MONGODB_URI;
+else if (NODE_ENV === 'production') dbString = DB_URI;
 else throw console.log("Needs a database to connect to!");
 
 mongoose.connect(dbString, {useNewUrlParser: true});
